@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here:http://sass-lang.com/
 .store {
+	height: 100%;
+
 	h1 {
 		margin: 0;
 		padding-bottom: 0.5em;
@@ -10,7 +12,10 @@
 		border-bottom: 3px dotted #77d;
 	}
 	.entry {
+		//float: left;
+		display: block;
 		overflow: auto;
+		margin-left: 17em;
 		margin-top: 1em;
 		border-bottom: 1px dotted #77d;
 		min-height: 100px;
