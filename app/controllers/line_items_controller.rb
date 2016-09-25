@@ -2,6 +2,7 @@ class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: :create
 
   # GET /line_items
   # GET /line_items.json
@@ -31,7 +32,8 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: 'Line item was successfully created.' }
+        format.html { redirect_to root }
+        format.js
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }
@@ -46,6 +48,7 @@ class LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.update(line_item_params)
         format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
+        format.js
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :edit }

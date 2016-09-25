@@ -2,8 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here:http://sass-lang.com/
 .products {
+	h1, p, form, .links {
+		margin-left: 17em;
+	}
 	table {
 		border-collapse: collapse;
+		margin-left: 17em;
 	}
 	table tr td {
 		padding: 5px;
