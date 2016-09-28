@@ -78,6 +78,7 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     pkg-config (1.1.7)
+    polyglot (0.3.5)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -118,6 +119,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    search_cop (1.0.6)
+      treetop
     spring (1.7.2)
     sprockets (3.7.0)
       concurrent-ruby (~> 1.0)
@@ -130,6 +133,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    treetop (1.6.8)
+      polyglot (~> 0.3)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -155,6 +160,7 @@ DEPENDENCIES
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  search_cop
   spring
   sqlite3
   turbolinks

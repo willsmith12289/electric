@@ -1,19 +1,17 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:edit, :update, :destroy]
   before_action :set_cart
   # GET /products
   # GET /products.json
   def index
     @products = Product.all
-   
   end
-  # def search
-  #    @products = Product.search(params[:search]).order("created_at DESC")
-  #    @products.all
-  # end
+
   # GET /products/1
   # GET /products/1.json
   def show
+    @products = Product.all.search(params[:q]).order("created_at DESC")
+    render "index"
   end
 
   # GET /products/new
@@ -65,6 +63,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def search
+     @search = Product.search(params[:q]).order("created_at DESC")
+     @product.all
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

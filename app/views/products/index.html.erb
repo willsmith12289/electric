@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Products</h1>
-
-
+<h1>Listing Products</h1
 <div id="searched">
   <%= render 'store/index' %>
 </div>
+
+<%= form_tag("products/search", method: "get") do %>
+  <%= label_tag(:q, "Search For:") %>
+  <%= text_field_tag (:q) %>
+  <%= submit_tag("Search") %>
+<% end -%>

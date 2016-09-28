@@ -1,4 +1,10 @@
 class Product < ActiveRecord::Base
+  include SearchCop
+
+  search_scope :search do
+    attributes :title, :description, :category
+  end
+  
   has_many :line_items
 
   before_destroy :ensure_not_referenced_by_any_line_item
