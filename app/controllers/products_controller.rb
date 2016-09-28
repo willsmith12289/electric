@@ -61,6 +61,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def search
+     @products = Product.search(params[:q]).order("created_at DESC")
+     render "index"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -69,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description, :image_url, :price)
+      params.require(:product).permit(:title, :description, :price)
     end
 end
