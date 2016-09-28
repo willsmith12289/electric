@@ -2,12 +2,10 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<h1>Parts</h1>
-
 <% cache ['store', Product.latest] do %>
   <% @products.each do |product| %>
     <% cache ['entry', product] do %>
-      <div class="entry">
+      <div id="entry">
         <%= image_tag(product.image_url) %>
         <h3><%= product.title %></h3>
         <%= sanitize(product.description) %>

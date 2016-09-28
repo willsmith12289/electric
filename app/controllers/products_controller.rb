@@ -5,8 +5,12 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+   
   end
-
+  # def search
+  #    @products = Product.search(params[:search]).order("created_at DESC")
+  #    @products.all
+  # end
   # GET /products/1
   # GET /products/1.json
   def show

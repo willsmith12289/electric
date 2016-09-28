@@ -15,6 +15,10 @@ class Product < ActiveRecord::Base
     Product.order(:updated_at).last
   end
 
+  # def self.search(search)
+  #   where("title like ? OR description like ? OR category like ?", "#{search}", "#{search}", "#{search}")
+  # end
+
   private
 
   def ensure_not_referenced_by_any_line_item
