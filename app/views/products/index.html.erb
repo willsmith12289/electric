@@ -4,8 +4,8 @@
 <div id="searched">
   <%= render 'store/index' %>
 </div>
-
-<%= form_tag("products/search", method: "get") do %>
+<%= link_to "New Product", new_product_path, class: "links" %>
+<%= form_tag(search_path, method: "get") do %>
   <%= label_tag(:q, "Search For:") %>
   <%= text_field_tag (:q) %>
   <%= submit_tag("Search") %>

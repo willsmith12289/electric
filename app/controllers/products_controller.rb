@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_cart
   # GET /products
   # GET /products.json
@@ -10,8 +10,6 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @products = Product.all.search(params[:q]).order("created_at DESC")
-    render "index"
   end
 
   # GET /products/new
@@ -64,8 +62,8 @@ class ProductsController < ApplicationController
   end
 
   def search
-     @search = Product.search(params[:q]).order("created_at DESC")
-     @product.all
+     @products = Product.search(params[:q]).order("created_at DESC")
+     render "index"
   end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -75,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description, :image_url, :price)
+      params.require(:product).permit(:title, :description, :price)
     end
 end
