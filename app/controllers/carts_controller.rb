@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   skip_before_action :authorize, only: [:create, :update, :destroy]
-  before_action :set_cart, only: [:show, :edit, :update, :destroy, :checkout]
+  before_action :set_cart, only: [:show, :edit, :create, :update, :destroy, :checkout]
 
   # GET /carts
   # GET /carts.json
@@ -25,17 +25,17 @@ class CartsController < ApplicationController
   # POST /carts
   # POST /carts.json
   def create
-    @cart = Cart.new(cart_params)
+    # @cart = Cart.new(cart_params)
 
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @cart.save
+    #     format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
+    #     format.json { render :show, status: :created, location: @cart }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @cart.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /carts/1

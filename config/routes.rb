@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get 'sessions/destroy'
+
+  post "signup", to: "users#new"
+  get "signup", to: "users#new"
   # get 'carts/:id/checkout' => 'carts#checkout'
   resources :users
   resources :line_items

@@ -1,7 +1,7 @@
 <h2>Your Cart</h2>
   <ul id="cart" class="left_margin">
-    <%= render (cart.line_items) %>
-    <li>Total: <%= number_to_currency(cart.total_price) %></li>
-    <li><%= button_to 'Empty Cart', cart, method: :delete, data: { confirm: 'Are you sure?'} %></li>
-    <li><%= link_to 'Finish Job', checkout_path %></li>
+    <%= render (@cart.line_items) %>
+    <li>Total: <%= number_to_currency(@cart.total_price) %></li>
+    <li><%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: 'Are you sure?'} %></li>
+    <li><%= button_to 'Finish Job', checkout_path %></li>
   </ul>
