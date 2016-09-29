@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   skip_before_action :authorize, only: [:create, :update, :destroy]
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy, :checkout]
 
   # GET /carts
   # GET /carts.json
@@ -63,11 +63,21 @@ class CartsController < ApplicationController
     end
   end
 
+  def checkout
+    if @hour = nil
+      @total_price = @cart.total_price
+    else
+      @hour = (params[:hour]).to_f
+      @wage = params[:wage].to_f
+      total_price = @cart.total_price
+      @total_price = total_price + (@hour * @wage)
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
-#    def set_cart
- #     @cart = Cart.find(params[:id])
-  #  end
+   # def set_cart
+   #   @cart = Cart.find(params[:id])
+   # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params

@@ -1,0 +1,16 @@
+<div class="left_margin">
+  <h1>Checkout</h1>
+  <%= form_tag checkout_path %>
+    <%= label_tag(:hour, "Hours spent:") %>
+    <%= select_tag(:hour, options_for_select((1..10), 10)) %>
+    <%= label_tag(:wage, "Wage Earned:") %>
+    <%= text_field_tag(:wage) %>
+    <%= submit_tag("Submit Hours") %>
+
+  <ul>
+    <%= render (@cart.line_items) %>
+    <li>Hours: <%= @hour %></li>
+    <li>Wage: <%= @wage %></li>
+    <li>Total: <%= number_to_currency(@total_price) %></li>
+  </ul>
+</div>

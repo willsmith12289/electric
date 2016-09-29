@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'admin' => 'admin#index'
+  get 'checkout' => 'carts#checkout'
+  post 'checkout' => 'carts#checkout'
+  delete 'checkout' => 'carts#checkout'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -9,7 +12,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get 'sessions/destroy'
-
+  # get 'carts/:id/checkout' => 'carts#checkout'
   resources :users
   resources :line_items
   resources :carts
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   match '/search', to: 'products#search', via: :get
+  # match 'carts/:id/checkout', to: 'carts#checkout', via: :post
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
