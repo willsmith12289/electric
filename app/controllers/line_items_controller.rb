@@ -48,8 +48,7 @@ class LineItemsController < ApplicationController
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
-        format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
-        format.js
+        format.html { redirect_to products_path, notice: 'Line item was successfully updated.' }
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :edit }
@@ -76,6 +75,6 @@ class LineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
+      params.require(:line_item).permit(:product_id, :cart_id, :quantity)
     end
 end

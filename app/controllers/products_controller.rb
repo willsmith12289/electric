@@ -63,13 +63,6 @@ class ProductsController < ApplicationController
   end
 
   def search
-    # puts '###########'
-    # puts '###########'
-    # puts '###########'
-    # puts '###########'
-    # puts '###########'
-    # puts '###########'
-    # puts '###########'
     if params[:home_depot]
       @hd_products = nokogiri_search
       render "index", locales: {hd_products: @hd_products}
@@ -117,17 +110,24 @@ class ProductsController < ApplicationController
     end
 
     def build_title(item_titles)
-      titles = Array.new
+      titles = Array.new()
       item_titles.each{|t| titles<<title = t.content.strip.split(' ').drop(1).join(' ').to_s}
       return titles
     end
 
     def build_price(item_prices, cents)
       prices = Array.new()
+      # puts '###########'
+      # puts '###########'
+      # puts '###########'
+      # puts '###########'
+      # puts '###########'
+      # puts '###########'
+      # puts '###########'
+      
       item_prices.each_with_index do |p,i| 
-        price = (p.content.include?('/')) ? p.content.split('/')[0].strip : p.content.strip
+        price = p.content.tr('^0-9', '').to_s
         price = "#{price.chomp(cents[i].content)}.#{cents[i].content}"
-        price.slice!(0)
         prices<<price.to_f
       end
       return prices
