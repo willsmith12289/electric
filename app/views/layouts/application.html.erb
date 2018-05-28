@@ -10,6 +10,9 @@
 <div id="banner">
   <%= @page_title || "Parts Catalog" %>
 </div>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end -%>
 <div id="columns">
   <div id="side">
     <div>

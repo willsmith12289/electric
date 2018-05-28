@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_path, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -63,65 +63,76 @@ class ProductsController < ApplicationController
   end
 
   def search
-    
-    doc = Nokogiri::HTML(open("https://www.homedepot.com/s/'#{params[:q].downcase.split.join('-')}'?NCNI-5")) do |config|
-      config.strict.noblanks
+    # puts '###########'
+    # puts '###########'
+    # puts '###########'
+    # puts '###########'
+    # puts '###########'
+    # puts '###########'
+    # puts '###########'
+    if params[:home_depot]
+      @hd_products = nokogiri_search
+      render "index", locales: {hd_products: @hd_products}
+    else
+      @products = Product.search(params[:q]).order("created_at DESC")
+      render "index"
     end
-    itemImg = doc.css('div.js-pod img')
-    itemTitle = doc.css('div.plp-pod__info .pod-plp__description')
-    itemDescription = doc.css('div.plp-pod__info .pod-plp__description a')
-    itemPrice = doc.css('div.plp-pod__info .price__wrapper .price')
-    descripts = Array.new()
-    itemDescription.each{|id| descripts<<id['href']}
-    imgs = Array.new()
-    itemImg.each{|i| imgs<<i['src'].strip}
-    titles = Array.new
-    itemTitle.each{|t| titles<<title = t.content.strip.split(' ').drop(1).join(' ').to_s}
-    prices = Array.new()
-    itemPrice.each do |p| 
-      prices<<price = (p.content.include?('/')) ? p.content.split('/')[0].strip : p.content.strip
-    end
-    puts prices
-    itemTitle.count.times do |x|
-      products = {title: titles[x], price: prices[x], description: descripts[x], image_url: imgs[x]}
-      if Product.create(products).valid?
-        Product.create(products)
-      else
-        next
-      end
-    end
-    # imgdesc = imgs.zip(descripts)
-    # products = titlePrice.zip(imgdesc)
-    # @products = products.each do |p|
-    #   p.to_a
-    #   prod = Product.new(p['title'], p.image_url, p.description, p.price)
-    #   return prod
-    # end
-    # itemImg.each_with_index do |product, index|
-    #   title = itemTitle[index](p.content.strip.start_with? '$') ?
-    #   img = itemImg[index]
-    #   description = itemDescription[index]
-    #   price = itemPrice[index]
-    #   # Product.new(,)
-    #   puts description
-    # end
-      # Product.new()
-      # img.each{|i| puts i['src']}
-      # title.each{|t| puts t.content}
-      # price.each{|p| puts p.content}
-
-    # clean_up(itemImg, itemTitle, itemPrice)
-    @products = Product.search(params[:q]).order("created_at DESC")
-    # @products = Product.all
-    render "index"
   end
   private
 
-    def clean_up(img, title, price)
-      img.count.times do |product|
-
+    def nokogiri_search
+      doc = Nokogiri::HTML(open("https://www.homedepot.com/s/'#{params[:q].downcase.split.join('-')}'?NCNI-5")) do |config|
+        config.strict.noblanks
       end
+      images = build_image(doc.css('div.js-pod img'))
+      titles = build_title(doc.css('div.plp-pod__info .pod-plp__description'))
+      descriptions = build_description(
+        doc.css('div.plp-pod__info .pod-plp__description a'))
+      prices = build_price(
+        doc.css('div.plp-pod__info .price__wrapper .price'),
+        doc.css('div.plp-pod__info .price__wrapper .price .price__format[2]'))
+
+      return build_products(titles, prices, descriptions, images)
     end
+
+    def build_products(titles, prices, descriptions, images)
+      hd_products = Array.new()
+      titles.count.times do |x|
+      product = {title: titles[x], price: prices[x], description: descriptions[x], image_url: images[x]}
+        hd_products<<product
+      end
+      return hd_products
+    end
+
+    def build_description(item_descriptions)
+      descripts = Array.new()
+      item_descriptions.each{|id| descripts<<id['href']}
+      return descripts
+    end
+
+    def build_image(item_images)
+      imgs = Array.new()
+      item_images.each{|i| imgs<<i['src'].strip}
+      return imgs
+    end
+
+    def build_title(item_titles)
+      titles = Array.new
+      item_titles.each{|t| titles<<title = t.content.strip.split(' ').drop(1).join(' ').to_s}
+      return titles
+    end
+
+    def build_price(item_prices, cents)
+      prices = Array.new()
+      item_prices.each_with_index do |p,i| 
+        price = (p.content.include?('/')) ? p.content.split('/')[0].strip : p.content.strip
+        price = "#{price.chomp(cents[i].content)}.#{cents[i].content}"
+        price.slice!(0)
+        prices<<price.to_f
+      end
+      return prices
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
@@ -129,6 +140,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :description, :price)
+      params.require(:product).permit(:title, :description, :price, :image_url)
     end
 end
