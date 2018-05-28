@@ -4,11 +4,17 @@
 #cart {
 	margin-left: 2em;
 
+	ul {
+		height: 100%;
+	}
+
 	li {
 		color: white;
 
 		form {
 			margin: 0;
 		}
+
 	}
+
 }
