@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   get 'store/index'
+  get ':id/checkout', to: 'line_items#checkout'
 
   resources :products do
     get :who_bought, on: :member

@@ -5,4 +5,5 @@
     <li>Total: <%= number_to_currency(cart.total_price) %></li>
     <br>
     <li><%= button_to 'Empty Cart', cart, method: :delete, data: { confirm: 'Are you sure?'} %></li>
+    <li><%= link_to 'Checkout', cart_path(cart) %></li>
   </ul>

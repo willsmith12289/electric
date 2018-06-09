@@ -117,14 +117,6 @@ class ProductsController < ApplicationController
 
     def build_price(item_prices, cents)
       prices = Array.new()
-      # puts '###########'
-      # puts '###########'
-      # puts '###########'
-      # puts '###########'
-      # puts '###########'
-      # puts '###########'
-      # puts '###########'
-      
       item_prices.each_with_index do |p,i| 
         price = p.content.tr('^0-9', '').to_s
         price = "#{price.chomp(cents[i].content)}.#{cents[i].content}"

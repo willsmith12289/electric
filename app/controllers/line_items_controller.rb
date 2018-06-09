@@ -13,6 +13,11 @@ class LineItemsController < ApplicationController
   # GET /line_items/1
   # GET /line_items/1.json
   def show
+
+  end
+
+  def checkout
+    render 'checkout'
   end
 
   # GET /line_items/new
