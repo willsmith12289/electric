@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   before_action :set_cart, only: :new
-  skip_before_action :authorize
+  skip_before_action :authenticate_user!
   def new
   end
 
   def create
-    user = User.find_by(name: params[:name])
+    user = current_user
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to admin_url
@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to store_url, notice: "Logged Out"
+    redirect_to blog_path, notice: "Logged Out"
   end
 end

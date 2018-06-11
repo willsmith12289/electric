@@ -1,21 +1,25 @@
 Rails.application.routes.draw do
-  get 'admin' => 'admin#index'
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+  
+  
+  devise_for :users
+  # get 'admin' => 'admin#index'
+  # controller :sessions do
+  #   get 'login' => :new
+  #   post 'login' => :create
+  #   delete 'logout' => :destroy
+  # end
 
-  get 'sessions/create'
+  # get 'sessions/create'
 
-  get 'sessions/destroy'
-
+  # get 'sessions/destroy'
+  resources :comments
+  resources :posts
   resource :checkout
   resources :users
   resources :line_items
   resources :carts
   get 'store/index'
-  get ':id/checkout', to: 'line_items#checkout'
+  # get ':id/checkout', to: 'line_items#checkout'
 
   resources :products do
     get :who_bought, on: :member
@@ -26,7 +30,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'products#index', as: 'store'
+  root 'posts#index', as: 'blog'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

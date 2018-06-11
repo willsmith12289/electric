@@ -1,0 +1,26 @@
+<% @stripe_refresh = true %>
+<%= form_tag checkout_path, id: 'payment-form' do %>     
+  <label for="card-element" class="center">
+    <h3 class="center text-muted">Credit or debit card</h3>
+  </label>
+  <% @cart.line_items.each do |p| %>
+    <div>
+      <p><%= p.quantity %> &times; <%= p.product.title %></p>
+      <p>Price: <%= number_to_currency(p.total_price) %></p>
+    </div>
+  <% end %>
+  <div class="col-md-6 offset-md-3">
+    <%= label_tag :amount, "Total: "%>
+    <%= number_to_currency(@cart.total_price) %>
+  </div>
+  <!-- Used to display form errors. -->
+  <div id="card-errors" role="alert"></div>
+  <div class="row">
+    <div id="card-element" class="col-md-8">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-light ">Submit Payment</button>          
+    </div>
+  </div>
+<% end -%>

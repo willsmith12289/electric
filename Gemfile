@@ -15,6 +15,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'bootstrap'
+gem 'summernote-rails'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug'

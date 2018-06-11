@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Electric</title>
+  <title>Two Barn Farm</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'https://js.stripe.com/v3/', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -17,12 +17,19 @@
 <% end -%>
 <div class="container-fluid">
   <div class="row">
-    <div id="side" class="col-md-2">
-        <%= render @cart %>
-    </div>
-    <div class="col-md-10">
-      <%= yield %>
-    </div>
+    <% if current_page?(store_index_path) && user_signed_in? %>
+      <div id="side" class="col-md-2">
+        <%= render 'carts/cart', cart: @cart %>
+        <div class="col-md-10">
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <div class="col-md-10 col-center">
+        <%= yield %>
+      </div>
+    <% end -%>
+
   </div>
 </div>
 

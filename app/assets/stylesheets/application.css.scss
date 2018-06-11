@@ -13,13 +13,8 @@
  */
 @import 'stripe';
 @import "bootstrap";
-// @import 'carts';
-// @import 'line_items';
-// @import 'products';
-// @import 'sessions';
-// @import 'store';
-// @import 'users';
-// @import 'admin';
+@import "summernote-bs4";
+@import "summernote-custom-theme.min";
 
 .flex-container {
 	display: flex;
@@ -33,4 +28,14 @@
 		border-radius: 5px;
 	}
 
+}
+
+.col-center {
+	margin: 0 auto;
+}
+
+.center {
+	float: none;
+	margin: 0 auto;
+	text-align: center;
 }
