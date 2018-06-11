@@ -1,12 +1,16 @@
 <h1>Home depot</h1>
 <% @hd_products.each do |prod| %>
-  <div id="entry">
-    <%= link_to(image_tag(prod[:image_url]), prod[:image_url]) %>
-    <h3><%= prod[:title] %></h3>
-    <a href="https://www.homedepot.com<%= sanitize(prod[:description]) %>"> View on Home Depot </a>
-    <div class="price_line">
-      <span class="price"><%= number_to_currency(prod[:price]) %></span>
+  <div id="entry" class="card flex-item" style="width: 18rem;">
+    <%= link_to(image_tag(prod[:image_url]), prod[:image_url], class: "card-img-top") %>
+    <div class="card-body">
+      <h4 class="card-title"><%= prod[:title] %></h4>
+      <p class="card-text">
+        <span class="price"><%= number_to_currency(prod[:price]) %></span>
+      </p>
+    </div>
+    <div class="card-footer text-center">
       <%= button_to 'Create Product', products_path(product: prod), remote: true %>
+      <a href="https://www.homedepot.com<%= sanitize(prod[:description]) %>"> View on Home Depot </a>
     </div>
   </div>
 <% end -%>

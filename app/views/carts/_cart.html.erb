@@ -1,9 +1,11 @@
-  <h2>Your Cart</h2>
-  <ul id="cart">
-    <%= render (cart.line_items) %>
-    <br>
-    <li>Total: <%= number_to_currency(cart.total_price) %></li>
-    <br>
-    <li><%= button_to 'Empty Cart', cart, method: :delete, data: { confirm: 'Are you sure?'} %></li>
-    <li><%= link_to 'Checkout', cart_path(cart) %></li>
-  </ul>
+<h2>Your Cart</h2>
+<ul id="cart" class="list-group list-unstyled">
+  <%= render (cart.line_items) %>
+</ul>
+<hr>
+<p>Total: <%= number_to_currency(cart.total_price) %></p>
+<hr>
+<div class="row">
+  <%= button_to 'Empty Cart', cart, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-light' %>
+  <%= link_to 'Checkout', cart_path(cart), class: 'btn btn-light' %>
+</div>

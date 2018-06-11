@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'sessions/destroy'
 
+  resource :checkout
   resources :users
   resources :line_items
   resources :carts

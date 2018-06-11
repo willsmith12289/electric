@@ -6,5 +6,5 @@
       Total: <%= number_to_currency(@cart.total_price) %>
     </li>
   </ul>
-  <%= link_to cart_path(@cart) %>
+  <%= link_to 'Checkout', new_checkout_path, class: 'btn btn-light' %>
 </div>

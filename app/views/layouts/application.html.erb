@@ -3,33 +3,28 @@
 <head>
   <title>Electric</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'https://js.stripe.com/v3/', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <% if @stripe_refresh %>
+    <meta name="stripe-refresh" content="<%= Time.zone.now.to_i %>" data-turbolinks-track="reload">
+  <% end %>
+  <%= tag :meta, name: 'stripe-public-key', content: Rails.application.secrets.stripe_public_key %>
 </head>
 <body class="<%= controller.controller_name %>">
-<div id="banner">
-  <%= @page_title || "Parts Catalog" %>
-</div>
+<%= render 'layouts/nav' %>
 <% if notice %>
   <p id="notice"><%= notice %></p>
 <% end -%>
-<div id="columns">
-  <div id="side">
-    <div>
-      <%= render @cart %>
+<div class="container-fluid">
+  <div class="row">
+    <div id="side" class="col-md-2">
+        <%= render @cart %>
     </div>
-    <% if session[:user_id] %>
-      <ul>
-        <li><%= link_to "Products", products_path %></li>
-        <li><%= link_to "Users", users_path %></li>
-      </ul>
-      <%= button_to 'Logout', logout_path, method: :delete %>
-    <% else %>
-      <%= button_to "Login", login_path %>
-    <% end -%>
+    <div class="col-md-10">
+      <%= yield %>
+    </div>
   </div>
 </div>
-<%= yield %>
 
 
 </body>

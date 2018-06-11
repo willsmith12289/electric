@@ -1,11 +1,13 @@
 <li>
   <%= line_item.quantity %> &times; <%= line_item.product.title %>
   <%= number_to_currency(line_item.total_price) %>
-  <%= link_to 'Delete', line_item, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <%= form_for(line_item, method: :put, remote: true) do |f| %>
-    <%= f.label :quantity,'Quantity' %>
-    <%= f.select :quantity, options_for_select(1..15, line_item.quantity) %>
-    <%= f.submit "Update" %>
-  <% end -%>
+    <%= form_for(line_item, method: :put, remote: true) do |f| %>
+      <%= f.label :quantity,'Quantity' %>
+      <%= f.select :quantity, options_for_select(1..15, line_item.quantity) %>
+  <div class="row">
+      <%= f.submit "Update", class: 'btn btn-light' %>
+    <% end -%>
+    <%= link_to 'Delete', line_item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' %>
+  </div>
 </li>
 <hr>

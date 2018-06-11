@@ -13,6 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'search_cop'
 gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'bootstrap'
 
 group :development, :test do
   gem 'byebug'

@@ -1,5 +1,12 @@
-<h1>Listing Products</h1
-<div id="searched">
+<div class="row">
+  <div class="col-md-8">
+    <h1>Listing Products</h1>
+  </div>
+  <div class="col-md-4">
+    <%= link_to "New Product", new_product_path, class: "btn btn-light" %>
+  </div>
+</div>
+<div id="searched" class="flex-container">
   <% if @hd_products %>
     <%= render 'store/home_depot' %>
   <% elsif @products %>
@@ -7,12 +14,11 @@
   <% end %>
 </div>
 <div class="search_form">
-  <%= link_to "New Product", new_product_path, class: "links" %>
   <%= form_tag(search_path, method: "get") do %>
     <%= label_tag(:q, "Search For:") %>
     <%= text_field_tag (:q) %>
     <%= label_tag(:home_depot, "Search Home Depot?") %>
     <%= radio_button_tag(:home_depot, true) %>
-    <%= submit_tag("Search") %>
+    <%= submit_tag("Search", class: 'btn btn-light') %>
   <% end -%>
 </div>
