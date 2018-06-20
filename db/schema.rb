@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20180611040657) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -26,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180611040657) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "product_id"
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180611040657) do
     t.integer  "quantity",   default: 1
   end
 
-  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id"
+  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -73,7 +76,7 @@ ActiveRecord::Schema.define(version: 20180611040657) do
     t.boolean  "admin",                  default: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
