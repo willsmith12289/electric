@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg mb-3 tan">
+  <%= link_to 'Two Barn Farm', two_barn_farm_url, class: 'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'The Flower Smith', flower_smith_url, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Blog', posts_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to 'The CSA', csa_url, class: 'dropdown-item' %>
+          <%= link_to 'The Plants', plants_url, class: 'dropdown-item' %>
+          <%= link_to 'The Farmers', farmers_url, class: 'dropdown-item' %>
+          <div class="dropdown-divider"></div>
+            <% if user_signed_in? %>
+              <%= link_to 'Account', edit_user_registration_path(current_user), class: 'dropdown-item' %>
+              <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+              <% if current_user.try(:admin?) %>
+                <%= link_to 'Sign Up', new_user_session_path, class: 'dropdown-item' %>
+              <% end -%>
+            <% else %>
+              <%= link_to 'Login', new_user_registration_path, class: 'dropdown-item' %>
+            <% end -%>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <%= form_tag('/search', method: "get") do %>
+        <%= text_field_tag :q, '', class: 'form-control mr-sm-2' %>
+        <%= submit_tag("Search", class: 'btn btn-outline-success my-2 my-sm-0') %>
+      <% end -%>
+     
+    </form>
+  </div>
+</nav>

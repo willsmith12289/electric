@@ -10,79 +10,38 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
-#banner {
-	background: #9c9;
-	padding: 10px;
-	border-bottom: 2px solid;
-	font: small-caps 40px/40px "Times New Roman", sans-serif;
-	color: #282;
+@import "nav";
+@import "stripe";
+@import "bootstrap";
+@import "summernote-bs4";
+@import "summernote-custom-theme.min";
+@import "tbf";
+
+.nav-item a {
+	color: #141412;
+}
+
+.flex-container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+
+	.flex-item {
+		flex: 1;
+		max-width: 30%;
+		text-align: center;
+		border-radius: 5px;
+	}
+
+}
+
+.col-center {
+	margin: 0 auto;
+}
+
+.center {
+	float: none;
+	margin: 0 auto;
 	text-align: center;
-	position: relative;
-	left: -10px;
-	top: -10px;
-
-	img {
-		float: left;
-	}
-
-}
-
-#notice {
-	color: #000;
-	border: 2px solid red;
-	padding: 1em;
-	margin-bottom: 2em;
-	background-color: #f0f0f0;
-	font: bold smaller sans-serif;
-}
-
-#columns {
-	background: #141;
-	height: 100%;
-
-	#main {
-		float: left;
-		margin-left: 17em;
-		padding: 1em;
-		background: white;
-	}
-
-	#side {
-		position: absolute;
-		left: 0;
-		top: 60px;
-		clear: left;
-		padding: 1em 2em;
-		width: 13em;
-		background: #141;
-		// height: 100%;
-
-		.button_to {
-			margin: 0;
-		}
-
-		h2 {
-			color: white;
-		}
-
-		ul {
-			padding: 0;
-
-			li {
-				list-style: none;
-
-				a {
-					color: #bfb;
-					font-size: small;
-				}
-
-			}
-
-		}
-
-	}
-
 }

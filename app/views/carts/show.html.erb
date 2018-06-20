@@ -1,3 +1,10 @@
-<h2>Your Cart</h2>
-
-  <%= render (@cart) %>
+<div class="receipt col-md-9 col-center">
+  <h1 class="center mt-3 mb-3">Your Order</h1>
+  <ul>
+    <%= render (@cart.line_items) %>
+    <li>
+      Total: <%= number_to_currency(@cart.total_price) %>
+    </li>
+  </ul>
+  <%= link_to 'Checkout', new_checkout_path, class: 'btn btn-light' %>
+</div>

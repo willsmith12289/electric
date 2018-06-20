@@ -1,30 +1,32 @@
 Rails.application.routes.draw do
-  get 'admin' => 'admin#index'
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+  
+  
+  devise_for :users
 
-  get 'sessions/create'
+  get 'flower_smith', to: 'landings#flower_smith'
+  get 'two_barn_farm', to: 'landings#two_barn_farm'
+  get 'csa', to: 'landings#csa'
+  get 'farmers', to: 'landings#farmers'
+  get 'plants', to: 'landings#plants'
+  get 'store/index'
 
-  get 'sessions/destroy'
-
+  resources :comments
+  resources :posts
+  resource :checkout
   resources :users
   resources :line_items
   resources :carts
-  get 'store/index'
 
   resources :products do
     get :who_bought, on: :member
   end
 
-  match '/search', to: 'products#search', via: :get
+  get '/search', to: 'products#search'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'products#index', as: 'store'
+  root 'landings#two_barn_farm', as: 'tbf'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

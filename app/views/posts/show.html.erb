@@ -1,0 +1,28 @@
+<div class="card col-center mt-5">
+  <div class="card-header">
+    <div class="row">
+      <%= link_to 'Back', posts_path, class: 'btn btn-light col-md-2'%>
+      <div class="col-md-8">
+        <h5 class="text-center mt-2"><%= @post.title %></h5>
+      </div>
+      <% if current_user.try(:admin?) %>
+        <%= link_to 'Comment', new_comment_path(post_id: @post), class: 'btn btn-light col-md-2'%>
+      <% end -%>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%=  @post.body.html_safe %></p>
+  </div>
+  <div class="card-footer text-center">
+    <% if @post.comments %>
+      <h2><%= @post.comments.count %> Comments</h2>
+      <%= render @post.comments %>
+    <% end -%>
+    <% if current_user.try(:admin?) %>
+      <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-link' %> |
+      <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-link' %>
+      <br>
+      <%= link_to 'Add a Comment', new_comment_path(post_id: @post), class: 'btn btn-light col-md-2'%>
+    <% end %>
+  </div>
+</div>

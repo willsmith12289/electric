@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  skip_before_action :authorize, only: [:create, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
@@ -58,7 +58,7 @@ class CartsController < ApplicationController
     @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
     respond_to do |format|
-      format.html { redirect_to store_url }
+      format.html { redirect_to products_url }
       format.json { head :no_content }
     end
   end
