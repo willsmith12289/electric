@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_cart
   before_action :authenticate_user!
-  require 'open-uri'
+  # require 'open-uri'
   # GET /products
   # GET /products.json
   def index
