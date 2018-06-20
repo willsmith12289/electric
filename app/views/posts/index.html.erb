@@ -3,5 +3,6 @@
   <%= render 'posts/post', post: post %>
 <% end %>
 <br>
-
-<%= link_to 'New Post', new_post_path, class: 'btn btn-lg btn-light' %>
+<% if current_user.try(:admin?) %>
+  <%= link_to 'New Post', new_post_path, class: 'btn btn-lg btn-light' %>
+<% end -%>
