@@ -16,7 +16,6 @@
         </div>
         <div class="card-footer text-center">
           <%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light'  %>
-          <a href="https://www.homedepot.com<%= sanitize(product.description) %>" class="btn btn-light"> Purchase </a>
         </div>
       </div>
     <% end -%>

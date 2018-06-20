@@ -16,6 +16,8 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'bootstrap'
 gem 'summernote-rails'
 gem 'devise'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug'
