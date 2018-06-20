@@ -6,7 +6,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if params.has_key?(:q)
+      @products = Product.search(params[:q]).order("created_at DESC")
+      render "index"
+    else
+      @products = Product.all
+    end
   end
 
   # GET /products/1

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get :who_bought, on: :member
   end
 
-  match '/search', to: 'products#search', via: :get
+  get '/search', to: 'products#search'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
