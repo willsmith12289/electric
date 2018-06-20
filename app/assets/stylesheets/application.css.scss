@@ -11,10 +11,16 @@
  * file per style scope.
  *
  */
-@import 'stripe';
+@import "nav";
+@import "stripe";
 @import "bootstrap";
 @import "summernote-bs4";
 @import "summernote-custom-theme.min";
+@import "tbf";
+
+.nav-item a {
+	color: #141412;
+}
 
 .flex-container {
 	display: flex;

@@ -11,28 +11,28 @@
   <%= tag :meta, name: 'stripe-public-key', content: Rails.application.secrets.stripe_public_key %>
 </head>
 <body class="<%= controller.controller_name %>">
+<%= render 'layouts/header' %>
 <%= render 'layouts/nav' %>
 <% if notice %>
   <p id="notice"><%= notice %></p>
 <% end -%>
 <div class="container-fluid">
   <div class="row">
-    <% if current_page?(store_index_path) && user_signed_in? %>
+    <% if current_page?(products_path) && user_signed_in? %>
       <div id="side" class="col-md-2">
         <%= render 'carts/cart', cart: @cart %>
-        <div class="col-md-10">
-          <%= yield %>
-        </div>
+      </div>
+      <div class="col-md-10 col-center">
+        <%= yield %>
       </div>
     <% else %>
       <div class="col-md-10 col-center">
         <%= yield %>
       </div>
     <% end -%>
-
   </div>
 </div>
-
+<%= render 'layouts/footer' %>
 
 </body>
 </html>

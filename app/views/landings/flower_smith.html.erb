@@ -1,0 +1,28 @@
+<h1 class="center mt-3 mb-3">The Flower Smith</h1>
+<div class="container">
+  <div class="col-md-8 col-center">
+    <div class="col-md-10 col-center">
+      <%= image_tag('flower1.jpg', class: 'img-fluid mb-5')%>
+    </div>
+    <p>
+      Let The Flowersmith at Two Barn Farm provide you with a variety of unique flowers for your special event.   We grow everything from anemones, ranunculus and tulips in the early spring to dahlias and gorgeous heirloom mums in the fall.
+    </p>
+    <p>
+      Small and large bouquets will be available at the Stangl Farmers’ Market on Saturdays the Clinton Farmers’ Market on Sundays during the growing season.
+    </p>
+    <div class="col-md-8 col-center">
+      <%= image_tag('flower2.jpg', class: 'img-fluid mb-5')%>
+    </div>
+    <p>
+      Contact Jane at 
+      <a href="mailto:theflowersmithattbf@gmail.com">theflowersmithattbf@gmail.com
+      </a> or call 
+      <a href="tel:908-442-5128">(908)442-5128</a>, if we can help with ready-made bouquets or flowers by the bunch or bucket for your event.
+    </p>
+    <% if current_user.try(:admin) %>
+      <div class="col-md-5 col-center">
+        <%= link_to 'Order Flowers', products_path, class: 'btn btn-light' %>
+      </div>
+    <% end -%>
+  </div>
+</div>
