@@ -22,4 +22,6 @@ test:
 
 production:
   <<: *default
-  database: db/production
+  database: postgresql-acute-89675
+  username: wsmi1289
+  password: <%= ENV['PASS'] %>
