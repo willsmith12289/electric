@@ -1,4 +1,5 @@
 class LandingsController < ApplicationController
+  before_action :searching?
   def flower_smith 
   end
 
@@ -13,4 +14,11 @@ class LandingsController < ApplicationController
 
   def plants
   end
+  private
+
+    def searching?
+      if params.has_key?(:q)
+       redirect_to posts_path({q: params[:q]})
+      end
+    end
 end

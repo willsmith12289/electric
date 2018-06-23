@@ -1,9 +1,12 @@
 <div class="card col-center mt-5">
   <div class="card-header">
     <div class="row">
+      <%= image_tag(@post.image_url(:header), class: "card-img-top") %>
+    </div>
+    <div class="row">
       <%= link_to 'Back', posts_path, class: 'btn btn-light col-md-2'%>
       <div class="col-md-8">
-        <h5 class="text-center mt-2"><%= @post.title %></h5>
+        <h2 class="text-center mt-2"><%= @post.title %></h2>
       </div>
       <% if current_user.try(:admin?) %>
         <%= link_to 'Comment', new_comment_path(post_id: @post), class: 'btn btn-light col-md-2'%>

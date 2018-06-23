@@ -1,6 +1,7 @@
-<div class="card">
+<div class="card mt-5">
   <div class="card-header">
-    <h5 class="text-center"><%= post.title %></h5>
+    <%= image_tag(post.image_url(:header), class: "card-img-top") %>
+    <h2 class="text-center"><%= post.title %></h2>
   </div>
   <div class="card-body">
     <p class="card-text">

@@ -19,7 +19,7 @@
       </a> or call 
       <a href="tel:908-442-5128">(908)442-5128</a>, if we can help with ready-made bouquets or flowers by the bunch or bucket for your event.
     </p>
-    <% if current_user.try(:admin) %>
+    <% if current_user.try(:admin) || current_user.try(:client) %>
       <div class="col-md-5 col-center">
         <%= link_to 'Order Flowers', products_path, class: 'btn btn-light' %>
       </div>

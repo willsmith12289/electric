@@ -1,25 +1,25 @@
 class Product < ActiveRecord::Base
-  include SearchCop
+  include PgSearch
+  pg_search_scope :search_products, against: {
+    title: 'A',
+    category: 'B',
+    description: 'C',
+    price: 'D'
+  }, using: { tsearch: { prefix: true } }
+
   mount_uploader :image, ImageUploader
-  search_scope :search do
-    attributes :title, :description, :category
-  end
+  validates :image, presence: true
   
   has_many :line_items, dependent: :destroy
-
   before_destroy :ensure_not_referenced_by_any_line_item
 
   validates :title, :description, presence: true
-  # validates :price, numericality: {greater_than_or_equal_to: 0.01}
+  validates :price, numericality: {greater_than_or_equal_to: 0.01}
   validates :title, uniqueness: true
 
   def self.latest
     Product.order(:updated_at).last
   end
-
-  # def self.search(search)
-  #   where("title like ? OR description like ? OR category like ?", "#{search}", "#{search}", "#{search}")
-  # end
 
   private
 

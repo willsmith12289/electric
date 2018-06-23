@@ -9,7 +9,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'search_cop'
 gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
@@ -18,6 +17,7 @@ gem 'summernote-rails'
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
+gem 'pg_search'
 
 group :development, :test do
   gem 'byebug'
